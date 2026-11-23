@@ -1,0 +1,9 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Paez;Juan;;;
+FN:Juan Paez
+TITLE:Soporte Técnico e Infraestructura IT
+TEL;TYPE=CELL,VOICE:+573193774409
+EMAIL;TYPE=PREF,INTERNET:jupaezur@gmail.com
+ADR;TYPE=WORK:;;Facatativá;Cundinamarca;;Colombia
+END:VCARD

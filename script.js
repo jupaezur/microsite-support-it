@@ -1,31 +1,33 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const btnVcard = document.getElementById('btn-vcard');
-  if (!btnVcard) return;
-
-  // Datos actuales conservados
+document.getElementById('btn-vcard').addEventListener('click', function () {
+  // Reemplaza con tus datos reales
   const nombre = "Juan Paez";
-  const apellido = "Paez";
-  const primerNombre = "Juan";
   const cargo = "Soporte Técnico e Infraestructura IT";
   const telefono = "+573193774409";
   const correo = "jupaezur@gmail.com";
   const ciudad = "Facatativá;Cundinamarca;;Colombia";
 
-  // CAMBIO 1: Saltos de línea CRLF (\r\n) para mejor compatibilidad en iOS
+  // Formato estándar vCard 3.0
   const vcard = [
     "BEGIN:VCARD",
     "VERSION:3.0",
-    `N:${apellido};${primerNombre};;;`,
+    `N:Paez;Juan ;;;`,
     `FN:${nombre}`,
     `TITLE:${cargo}`,
     `TEL;TYPE=CELL,VOICE:${telefono}`,
     `EMAIL;TYPE=PREF,INTERNET:${correo}`,
     `ADR;TYPE=WORK:;;${ciudad}`,
     "END:VCARD"
-  ].join("\r\n");
+  ].join("\n");
 
-  // CAMBIO 2: Enlace data URI directo en el <a> en lugar de Blob + URL.createObjectURL
-  const dataUri = "data:text/vcard;charset=utf-8," + encodeURIComponent(vcard);
-  btnVcard.setAttribute("href", dataUri);
-  btnVcard.setAttribute("download", "Contacto_Soporte_Tecnico.vcf");
+  // Crear archivo descargable en memoria
+  const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  
+  const link = document.createElement("a");
+  link.href = url;
+  link.setAttribute("download", "Contacto_Soporte_Tecnico.vcf");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 });
